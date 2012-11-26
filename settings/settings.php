@@ -48,7 +48,6 @@ include_once(MC_PATH_APP_MODEL_NODE . DS . 'node.class.php');
 include_once(MC_PATH_APP_MODEL_LEAF . DS . 'leaf.class.php');
 // The user model doesn't extend anything.
 include_once(MC_PATH_APP_MODEL_USER . DS . 'user.class.php');
-// Done. Your stupid autoloader can go fuck itself.
 
 /**
  * Memcache settings.

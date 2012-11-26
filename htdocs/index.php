@@ -17,8 +17,7 @@ ini_set('memory_limit', '16M');
  
  
 /**
- * This seems to be the minimum code needed
- * to include the bloody settings file.
+ * Include the settings file.
  */
 define('DS', DIRECTORY_SEPARATOR);
 define('MC_PATH', dirname(__DIR__));
