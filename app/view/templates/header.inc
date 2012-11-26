@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Fractal Trees - An HTML5 Canvas Fractal Tree Generator</title>
+    <title>MemcacheCMS - A Memcache Content Management System</title>
     <link type="text/css" href="css/bootstrap.min.css" rel="stylesheet" />
     <!-- Include css file. -->
     <link type="text/css" href="css/MemcacheCMS.css" rel="stylesheet" />
