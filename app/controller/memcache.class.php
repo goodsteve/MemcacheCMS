@@ -16,6 +16,12 @@ class mcMemcacheController {
     $this->settings = array();
     return null;
   }
+  public function get($key = '') {
+    return $this->link->get($this->hash($key));
+  }
+  public function delete($key = '', $timeout = MC_MEMCACHE_DEFAULT_TIMEOUT) {
+    return $this->link->delete($this->hash($key), $timeout);
+  }
   public function hash($str = '') {
     return sha1($str);
   }
@@ -30,6 +36,12 @@ class mcMemcacheController {
       }
     }
     return true;
+  }
+  public function replace($key = '', $value = array(), $compress = MC_MEMCACHE_DEFAULT_COMPRESS, $expire = MC_MEMCACHE_DEFAULT_EXPIRE) {
+    return $this->link->replace($this->hash($key), $value, $compress, $expire);
+  }
+  public function set($key = '', $value = array(), $compress = MC_MEMCACHE_DEFAULT_COMPRESS, $expire = MC_MEMCACHE_DEFAULT_EXPIRE) {
+    return $this->link->set($this->hash($key), $value, $compress, $expire);
   }
 }
 ?>

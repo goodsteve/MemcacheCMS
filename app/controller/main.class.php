@@ -1,17 +1,18 @@
 <?php
 class mcMainController {
   // See __construct() for object variable instantiation.
-  private $filesystem = null;   // mcFilesystemController object.
-  private $html       = null;   // mcHtmlController object.
-  private $memcache   = null;   // mcMemcacheController object.
-  private $model      = null;   // mcModelController object.
-  private $page       = null;   // mcPageController object.
-  private $request    = null;   // mcRequestController object.
-  private $response   = null;   // mcResponseController object.
-  private $status     = null;   // mcStatusController object.
-  private $tree       = null;   // mcTreeController object.
-  private $user       = null;   // mcUserController object.
-  private $utils      = null;   // mcUtilsController object.
+  public $crud        = null;   // mcCrudController object.
+  public $filesystem  = null;   // mcFilesystemController object.
+  public $html        = null;   // mcHtmlController object.
+  public $memcache    = null;   // mcMemcacheController object.
+  public $model       = null;   // mcModelController object.
+  public $page        = null;   // mcPageController object.
+  public $request     = null;   // mcRequestController object.
+  public $response    = null;   // mcResponseController object.
+  public $status      = null;   // mcStatusController object.
+  public $tree        = null;   // mcTreeController object.
+  public $user        = null;   // mcUserController object.
+  public $utils       = null;   // mcUtilsController object.
   // Settings
   private $settings   = array();  // $mcSettings multi-dimensional array.
   private function main() {
@@ -34,6 +35,7 @@ class mcMainController {
   }
   public function __construct($settings = array()) {
     $this->settings   = $settings;
+    $this->crud       = new mcCrudController();
     $this->filesystem = new mcFilesystemController();
     $this->html       = new mcHtmlController();
     $this->memcache   = new mcMemcacheController($this->settings['memcache']);
@@ -49,6 +51,7 @@ class mcMainController {
   }
   public function close() {
     $this->memcache->close();
+    $this->crud       = null;
     $this->filesystem = null;
     $this->html       = null;
     $this->memcache   = null;

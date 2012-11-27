@@ -29,7 +29,9 @@ $mcSettings = array();
 /**
  * Include some shtuff.
  * What, no super fancy dynamic auto-bootstrapper-loader-thingy?
+ * Nope.
  */
+include_once(MC_PATH_APP_CONTROLLER . DS . 'crud.class.php');
 include_once(MC_PATH_APP_CONTROLLER . DS . 'filesystem.class.php');
 include_once(MC_PATH_APP_CONTROLLER . DS . 'html.class.php');
 include_once(MC_PATH_APP_CONTROLLER . DS . 'main.class.php');
@@ -52,6 +54,9 @@ include_once(MC_PATH_APP_MODEL_USER . DS . 'user.class.php');
 /**
  * Memcache settings.
  */
+define('MC_MEMCACHE_DEFAULT_COMPRESS', MEMCACHE_COMPRESSED);
+define('MC_MEMCACHE_DEFAULT_EXPIRE', 3600);
+define('MC_MEMCACHE_DEFAULT_TIMEOUT', 0);
 $i = 0;
 $mcSettings['memcache'] = array();
 $mcSettings['memcache'][$i]['host'] = 'localhost';
