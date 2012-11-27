@@ -1,31 +1,32 @@
 <?php
 class mcRequestController {
-  private $packets  = array();
+  private $packets  = array();  // Valid request packets to be processed by mcMainController::main().
+  private $wsapi    = array();  // @see settings/wsapi.php
   private function packetize($superGlobal = array()) {
-    global $mcSettings;
     if (isset($superGlobal['o']) && isset($superGlobal['m'])) {
-      if (isset($mcSettings['wsapi'][$superGlobal['o']][$superGlobal['m']])) {
-        if ($this->validate($superGlobal, $mcSettings['wsapi'][$superGlobal['o']][$superGlobal['m']])) {
+      if (isset($this->wsapi[$superGlobal['o']][$superGlobal['m']])) {
+        if ($this->validate($superGlobal, $this->wsapi[$superGlobal['o']][$superGlobal['m']])) {
           $this->packets[]  = $superGlobal;
         }
       }
     }
     return null;
   }
-  private function validate($args = array(), $settings = array()) {
-    foreach ($settings['required'] AS $k => $field) {
+  private function validate($args = array(), $wsapi = array()) {
+    foreach ($wsapi['required'] AS $k => $field) {
       if (!isset($args[$field]) || !$args[$field]) {
         return false;
       }
     }
-    foreach ($settings['optional'] AS $k => $field) {
+    foreach ($wsapi['optional'] AS $k => $field) {
       if (!isset($args[$field])) {
         return false;
       }
     }
     return true;
   }
-  public function __construct() {
+  public function __construct($wsapi = array()) {
+    $this->wsapi  = $wsapi;
     return null;
   }
   public function getPackets() {

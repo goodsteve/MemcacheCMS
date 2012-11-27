@@ -27,7 +27,7 @@ include_once(MC_PATH_SETTINGS . DS . 'settings.php');
 /**
  * Instantiate the main object and run that thang.
  */
-$mc = new mcMainController();
+$mc = new mcMainController($mcSettings);
 $mc->run();
 $mc->close();
 

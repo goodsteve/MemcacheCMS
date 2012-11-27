@@ -3,9 +3,8 @@ class mcMemcacheController {
   private $link     = null;
   private $linked   = false;
   private $settings = array();
-  public function __construct() {
-    global $mcSettings;
-    $this->settings = $mcSettings['memcache'];
+  public function __construct($settings = array()) {
+    $this->settings = $settings;
     return null;
   }
   public function close() {

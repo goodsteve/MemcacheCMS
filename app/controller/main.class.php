@@ -12,6 +12,8 @@ class mcMainController {
   private $tree       = null;   // mcTreeController object.
   private $user       = null;   // mcUserController object.
   private $utils      = null;   // mcUtilsController object.
+  // Settings
+  private $settings   = array();  // $mcSettings multi-dimensional array.
   private function main() {
     $requestPackets = $this->request->getPackets();
     if (!empty($requestPackets)) {
@@ -30,13 +32,14 @@ class mcMainController {
     }
     return false;
   }
-  public function __construct() {
+  public function __construct($settings = array()) {
+    $this->settings   = $settings;
     $this->filesystem = new mcFilesystemController();
     $this->html       = new mcHtmlController();
-    $this->memcache   = new mcMemcacheController();
+    $this->memcache   = new mcMemcacheController($this->settings['memcache']);
     $this->model      = new mcModelController();
     $this->page       = new mcPageController();
-    $this->request    = new mcRequestController();
+    $this->request    = new mcRequestController($this->settings['wsapi']);
     $this->response   = new mcResponseController();
     $this->status     = new mcStatusController();
     $this->tree       = new mcTreeController();
