@@ -21,6 +21,15 @@ define('MC_PATH_HTDOCS', MC_PATH . DS . 'htdocs');
 define('MC_PATH_LOGS', MC_PATH . DS . 'logs');
 
 /**
+ * Server variables.
+ */
+define('MC_SERVER_NAME', $_SERVER['SERVER_NAME']);
+define('MC_SERVER_PORT', $_SERVER['SERVER_PORT']);
+define('MC_URL', $_SERVER['PHP_SELF']);
+define('MC_URL_ARGS', ($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : null);
+define('MC_URL_FULL', ($_SERVER['QUERY_STRING']) ? $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'] : $_SERVER['PHP_SELF']);
+
+/**
  * Global variables.
  */
 $mc         = null;
@@ -48,8 +57,6 @@ include_once(MC_PATH_APP_CONTROLLER . DS . 'utils.class.php');
 include_once(MC_PATH_APP_MODEL_ROOT . DS . 'root.class.php');
 include_once(MC_PATH_APP_MODEL_NODE . DS . 'node.class.php');
 include_once(MC_PATH_APP_MODEL_LEAF . DS . 'leaf.class.php');
-// The user model doesn't extend anything.
-include_once(MC_PATH_APP_MODEL_USER . DS . 'user.class.php');
 
 /**
  * Memcache settings.
@@ -62,6 +69,20 @@ $mcSettings['memcache'] = array();
 $mcSettings['memcache'][$i]['host'] = 'localhost';
 $mcSettings['memcache'][$i]['port'] = 11211;
 ++$i;
+
+/**
+ * Page settings.
+ */
+define('MC_MIN_PAGE_NAME_LENGTH', 3);
+
+/**
+ * User settings.
+ */
+define('MC_USER_COOKIE_EXPIRE', 3600);
+define('MC_USER_HTTP_USER_AGENT', $_SERVER['HTTP_USER_AGENT']);
+define('MC_USER_KEY_COOKIE_NAME', 'byogb4bpo983h3ounf');
+define('MC_USER_REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
+define('MC_USER_SESSION_COOKIE_NAME', 'v7892v5t2vo9unpa09h0');
 
 /**
  * Get the web service API settings.

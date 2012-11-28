@@ -17,19 +17,28 @@ class mcMainController {
   private $settings   = array();  // $mcSettings multi-dimensional array.
   private function main() {
     $requestPackets = $this->request->getPackets();
+    // Process POST and GET requests
     if (!empty($requestPackets)) {
       foreach ($requestPackets AS $p => $packet) {
         call_user_func_array(array($this->$packet['o'], $packet['m']), array($packet));
       }
-    } else {
-      $this->page->get(array('type' => 'user', 'name' => 'login'));
+    }
+    // Show default pages
+    if ($this->page->pageSet() == false) {
+      if ($this->user->isAuth() == false) {
+        $this->page->getPage('user', 'login');
+      } else {
+        $this->page->getPage('root','root');
+      }
     }
     return null;
   }
   private function open() {
     if ($this->memcache->open()) {
-      $this->request->init();
-      return true;
+      if ($this->user->verify()) {
+        $this->request->init();
+        return true;
+      }
     }
     return false;
   }
@@ -68,6 +77,8 @@ class mcMainController {
   public function run() {
     if ($this->open()) {
       $this->main();
+    } else {
+      $this->user->logout();
     }
     return null;
   }

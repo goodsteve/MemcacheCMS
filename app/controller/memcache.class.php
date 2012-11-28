@@ -17,14 +17,14 @@ class mcMemcacheController {
     return null;
   }
   public function get($key = '') {
-    return $this->link->get($this->hash($key));
+    global $mc;
+    return $this->link->get($mc->utils->hash($key));
   }
   public function delete($key = '', $timeout = MC_MEMCACHE_DEFAULT_TIMEOUT) {
-    return $this->link->delete($this->hash($key), $timeout);
+    global $mc;
+    return $this->link->delete($mc->utils->hash($key), $timeout);
   }
-  public function hash($str = '') {
-    return sha1($str);
-  }
+  
   public function open() {
     if ($this->linked == false) {
       $this->link = new Memcache();
@@ -37,11 +37,13 @@ class mcMemcacheController {
     }
     return true;
   }
-  public function replace($key = '', $value = array(), $compress = MC_MEMCACHE_DEFAULT_COMPRESS, $expire = MC_MEMCACHE_DEFAULT_EXPIRE) {
-    return $this->link->replace($this->hash($key), $value, $compress, $expire);
+  public function replace($key = '', $value = null, $compress = MC_MEMCACHE_DEFAULT_COMPRESS, $expire = MC_MEMCACHE_DEFAULT_EXPIRE) {
+    global $mc;
+    return $this->link->replace($mc->utils->hash($key), $value, $compress, $expire);
   }
-  public function set($key = '', $value = array(), $compress = MC_MEMCACHE_DEFAULT_COMPRESS, $expire = MC_MEMCACHE_DEFAULT_EXPIRE) {
-    return $this->link->set($this->hash($key), $value, $compress, $expire);
+  public function set($key = '', $value = null, $compress = MC_MEMCACHE_DEFAULT_COMPRESS, $expire = MC_MEMCACHE_DEFAULT_EXPIRE) {
+    global $mc;
+    return $this->link->set($mc->utils->hash($key), $value, $compress, $expire);
   }
 }
 ?>
