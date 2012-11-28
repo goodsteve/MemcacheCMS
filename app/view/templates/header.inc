@@ -29,11 +29,11 @@
             <div class="span14">
               <?php if ($mc->user->isAuth() == false) { ?>
               <i>A memcache content management system.</i>
-              <?php } else { ?>
-              <a href="<?php echo MC_URL; ?>?o=user&m=logout">Sign out</a>
-              <?php } ?>
+              <?php } else {
+                include_once(MC_PATH_APP_VIEW_TEMPLATES . DS . 'menu.inc');
+              }
+              ?>
             </div>
           </div>
         </div>
       </div>
-      <br />

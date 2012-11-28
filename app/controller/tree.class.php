@@ -43,6 +43,17 @@ class mcTreeController {
     }
     return null;
   }
+  public function getTreeLinkOptions($treeLinks = array(), $selected = '') {
+    $linkOptions  = '';
+    foreach ($treeLinks AS $key => $linkPath) {
+      if ($key != $selected) {
+        $linkOptions  .= '<option value="' . $key . '">' . $linkPath . '</option>';
+      } else {
+        $linkOptions  .= '<option value="' . $key . '" selected="selected">' . $linkPath . '</option>';
+      }
+    }
+    return $linkOptions;
+  }
   public function getTreeLinks($fromKey = '') {
     $treeLinks  = array();
     if ($fromKey) {
@@ -66,6 +77,11 @@ class mcTreeController {
     global $mc;
     $this->root->name   = $args['name'];
     $mc->crud->update($this->root->key, $this->root, true);
+    return null;
+  }
+  public function viewNode($args = array()) {
+    global $mc;
+    $mc->page->getPage('node', 'node');
     return null;
   }
 }
