@@ -17,11 +17,11 @@ class mcUserController {
   }
   public function login($args = array()) {
     global $mc;
-    $this->key      = $mc->utils->hash(implode('::', $args));
+    $this->key  = $mc->utils->hash(implode(MC_MEMCACHE_KEY_CONCAT, $args));
     $this->session  = $mc->utils->hash($this->key . MC_USER_HTTP_USER_AGENT . MC_USER_REMOTE_ADDR);
     setcookie(MC_USER_KEY_COOKIE_NAME, $this->key, (time() + MC_USER_COOKIE_EXPIRE), '/', MC_SERVER_NAME, false, true);
     setcookie(MC_USER_SESSION_COOKIE_NAME, $this->session, (time() + MC_USER_COOKIE_EXPIRE), '/', MC_SERVER_NAME, false, true);
-    $this->auth     = true;
+    $this->auth = true;
     $mc->tree->init($this->key);
     return null;
   }
@@ -38,12 +38,12 @@ class mcUserController {
   public function verify() {
     global $mc;
     if (isset($_COOKIE[MC_USER_KEY_COOKIE_NAME]) && isset($_COOKIE[MC_USER_SESSION_COOKIE_NAME])) {
-      $this->key      = $_COOKIE[MC_USER_KEY_COOKIE_NAME];
+      $this->key  = $_COOKIE[MC_USER_KEY_COOKIE_NAME];
       if ($_COOKIE[MC_USER_SESSION_COOKIE_NAME] === $mc->utils->hash($this->key . MC_USER_HTTP_USER_AGENT . MC_USER_REMOTE_ADDR)) {
         $this->session  = $_COOKIE[MC_USER_SESSION_COOKIE_NAME];
         setcookie(MC_USER_KEY_COOKIE_NAME, $this->key, (time() + MC_USER_COOKIE_EXPIRE), '/', MC_SERVER_NAME, false, true);
         setcookie(MC_USER_SESSION_COOKIE_NAME, $this->session, (time() + MC_USER_COOKIE_EXPIRE), '/', MC_SERVER_NAME, false, true);
-        $this->auth     = true;
+        $this->auth = true;
         $mc->tree->init($this->key);
         return true;
       }

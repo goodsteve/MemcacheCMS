@@ -64,6 +64,7 @@ include_once(MC_PATH_APP_MODEL_LEAF . DS . 'leaf.class.php');
 define('MC_MEMCACHE_DEFAULT_COMPRESS', MEMCACHE_COMPRESSED);
 define('MC_MEMCACHE_DEFAULT_EXPIRE', 3600);
 define('MC_MEMCACHE_DEFAULT_TIMEOUT', 0);
+define('MC_MEMCACHE_KEY_CONCAT', ':');
 $i = 0;
 $mcSettings['memcache'] = array();
 $mcSettings['memcache'][$i]['host'] = 'localhost';

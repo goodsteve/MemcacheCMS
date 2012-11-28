@@ -21,7 +21,7 @@
         Password:
       </div>
       <div class="span4">
-        <input type="text" name="password" id="password" size="16" maxlength="64" />
+        <input type="password" name="password" id="password" size="16" maxlength="64" />
       </div>
     </div>
     <br />

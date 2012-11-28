@@ -32,7 +32,6 @@
               <?php } else { ?>
               <a href="<?php echo MC_URL; ?>?o=user&m=logout">Sign out</a>
               <?php } ?>
-              
             </div>
           </div>
         </div>

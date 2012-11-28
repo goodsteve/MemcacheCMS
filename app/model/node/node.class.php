@@ -1,7 +1,8 @@
 <?php
-class mcNodeModel {
-  public function __construct() {
-    return null;
-  }
+class mcNodeModel extends mcRootModel {
+  public $level     = 1;
+  public $name      = 'Node';
+  public $parent    = '';
+  public $type      = 'node';
 }
 ?>

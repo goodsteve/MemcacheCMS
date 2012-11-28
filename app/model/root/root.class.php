@@ -1,37 +1,16 @@
 <?php
 class mcRootModel {
+  public $branches  = array();
   public $created   = '';
   public $key       = '';
+  public $level     = 0;
   public $modified  = '';
+  public $name      = 'Root';
   public $owner     = '';
-  public $name      = '';
-  public $branches  = array();
-  protected function create() {
-    global $mc;
-    $mc->memcache->set($this->key, get_object_vars($this));
-    return null;
-  }
-  protected function getBranches() {
-    return null;
-  }
-  protected function init() {
-    global $mc;
-    if (($res = $mc->memcache->get($this->key)) !== false) {
-      foreach ($res AS $field => $value) {
-        $this->$field = $value;
-      }
-    } else {
-      $this->create();
-    }
-    return null;
-  }
-  public function __construct($key = '') {
-    $this->created  = time();
-    $this->key      = $key;
+  public $type      = 'root';
+  public function __construct() {
+    $this->created  = microtime();
     $this->modified = $this->created;
-    $this->owner    = $key;
-    $this->name     = 'Root';
-    $this->init();
     return null;
   }
 }
