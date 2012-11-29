@@ -8,12 +8,10 @@ class mcTreeController {
   public function changeParent($key = '', $currentParentKey = '', $newParentKey = '') {
     global $mc;
     if ($currentParentNode = $this->getKey($currentParentKey)) {
-      echo 'current';
       $currentParentNode->branches  = $mc->utils->deleteArrayValue($currentParentNode->branches, $key);
       $mc->crud->update($currentParentKey, $currentParentNode, true);
     }
     if ($newParentNode = $this->getKey($newParentKey)) {
-      echo 'new';
       $newParentNode->branches[]  = $key;
       $mc->crud->update($newParentKey, $newParentNode, true);
     }

@@ -31,7 +31,6 @@ $rootTreeLinks  = $mc->tree->getTreeLinks($rootObj->key);
         </div>
       </div>
       </form>
-      <br />
     </div>
     <!-- Branch form -->
     <div class="span5 well mc-branch-form">
@@ -55,7 +54,6 @@ $rootTreeLinks  = $mc->tree->getTreeLinks($rootObj->key);
         </div>
       </div>
       </form>
-      <br />
     </div>
   </div>
   <div class="span8 offset1">

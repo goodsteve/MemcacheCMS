@@ -12,14 +12,14 @@ $nodeParentOptions  = $mc->tree->getNodeParentOptions($rootTreeLinks, $nodeObj->
   <div class="span12">
     <!-- Node form -->
     <div class="span12 well">
-      <h4><?php echo $nodeObj->name; ?> Form</h4>
-      <br />
       <form name="mcNodeForm" id="mcNodeForm" method="post" action="<?php echo MC_URL_FULL; ?>">
       <input type="hidden" name="o" value="tree" />
       <input type="hidden" name="m" value="updateNode" />
       <input type="hidden" name="key" value="<?php echo $nodeObj->key; ?>" />
       <div class="row">
         <div class="span10">
+          <h4><?php echo $nodeObj->name; ?> Form</h4>
+          <br />
           <div class="row">
             <div class="span1 mc-label">
               Parent:
@@ -40,6 +40,7 @@ $nodeParentOptions  = $mc->tree->getNodeParentOptions($rootTreeLinks, $nodeObj->
           </div>
         </div>
         <div class="span2">
+          <br />
           <div class="row">
             <div class="span2">
               <input type="submit" class="btn btn-success mc-form-button" name="mcNodeFormSubmit" id="mcNodeFormSubmit" value="Save Node" />
@@ -50,6 +51,13 @@ $nodeParentOptions  = $mc->tree->getNodeParentOptions($rootTreeLinks, $nodeObj->
               <input type="reset" class="btn btn-info mc-form-button" name="mcNodeFormReset" id="mcNodeFormReset" value="Undo Changes" />
             </div>
           </div>
+          <?php if (empty($nodeObj->branches)) { ?>
+          <div class="row mc-margin-top-15">
+            <div class="span2">
+              <button class="btn btn-danger mc-form-button" name="mcNodeFormDelete" id="mcNodeFormDelete">Delete</button>
+            </div>
+          </div>
+          <?php } ?>
         </div>
       </div>
       </form>
@@ -90,7 +98,6 @@ $nodeParentOptions  = $mc->tree->getNodeParentOptions($rootTreeLinks, $nodeObj->
         </div>
       </div>
       </form>
-      <br />
     </div>
   </div>
   <div class="span8 offset1">
