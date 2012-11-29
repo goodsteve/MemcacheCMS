@@ -1,7 +1,13 @@
 #memcache-cms {margin: 20px;}
 #memcache-cms h3 a {color: #888;}
+#memcache-cms .mc-form-button {width: 140px;}
 #memcache-cms .mc-label {font-weight: bold; padding-top: 4px;}
 #memcache-cms .mc-margin-left-10 {margin-left: 10px;}
 #memcache-cms .mc-margin-left-15 {margin-left: 15px;}
 #memcache-cms .mc-margin-left-20 {margin-left: 20px;}
 #memcache-cms .mc-margin-top-5 {margin-top: 5px;}
+#memcache-cms .mc-margin-top-10 {margin-top: 10px;}
+#memcache-cms .mc-margin-top-15 {margin-top: 15px;}
+#memcache-cms .mc-menu button {padding: 8px; width: 140px;}
+#memcache-cms .mc-padding-5 {padding: 5px;}
+#memcache-cms .well {margin-left: 0;}

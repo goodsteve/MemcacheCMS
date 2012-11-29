@@ -13,6 +13,9 @@
     <script type="text/javascript">
       $(function(){
         mc = new MemcacheCMS();
+        $('#memcache-cms .mc-menu button').click(function() {
+          mc.menuButtonClick(this);
+        });
       });
     </script>
   </head>

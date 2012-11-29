@@ -1,8 +1,9 @@
 <div class="row">
   <div class="span12">
-    <ul class="nav nav-pills mc-margin-left-20">
-      <li><a href="<?php echo MC_URL; ?>">Root</a></li>
-      <li><a href="<?php echo MC_URL; ?>?o=user&m=logout">Sign out</a></li>
-    </ul>
+    <div class="btn-group mc-menu">
+      <button class="btn" id="mcMenuHomeButton" rel="home"><i class="icon-home"></i> Home</button>
+      <button class="btn" id="mcMenuLogoutButton" rel="logout"><i class="icon-user"></i> Sign out</button>
+    </div>
   </div>
 </div>
+<br />

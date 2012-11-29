@@ -1,7 +1,22 @@
 <?php
 class mcTreeController {
+  private $node   = null;     // mcNodeModel object.
   private $root   = null;     // mcRootModel object.
   public function __construct() {
+    return null;
+  }
+  public function changeParent($key = '', $currentParentKey = '', $newParentKey = '') {
+    global $mc;
+    if ($currentParentNode = $this->getKey($currentParentKey)) {
+      echo 'current';
+      $currentParentNode->branches  = $mc->utils->deleteArrayValue($currentParentNode->branches, $key);
+      $mc->crud->update($currentParentKey, $currentParentNode, true);
+    }
+    if ($newParentNode = $this->getKey($newParentKey)) {
+      echo 'new';
+      $newParentNode->branches[]  = $key;
+      $mc->crud->update($newParentKey, $newParentNode, true);
+    }
     return null;
   }
   public function createRootBranch($args = array()) {
@@ -23,8 +38,35 @@ class mcTreeController {
     $mc->page->getPage('root', 'root');
     return null;
   }
+  public function getKey($key = '') {
+    global $mc;
+    if ($key) {
+      return $mc->crud->read($key);
+    }
+    return false;
+  }
+  public function getNode() {
+    return $this->node;
+    return false;
+  }
   public function getRoot() {
     return $this->root;
+  }
+  
+  public function getNodeParentOptions(&$treeLinks, $node = '', $parent = '') {
+    $parentOptions  = '';
+    if ($node && $parent) {
+      foreach ($treeLinks AS $key => $linkPath) {
+        if ($key != $node) {
+          if ($key != $parent) {
+            $parentOptions  .= '<option value="' . $key . '">' . $linkPath . '</option>';
+          } else {
+            $parentOptions  .= '<option value="' . $key . '" selected="selected">' . $linkPath . '</option>';
+          }
+        }
+      }
+    }
+    return $parentOptions;
   }
   public function getTree($fromKey = '') {
     global $mc;
@@ -73,6 +115,34 @@ class mcTreeController {
     }
     return null;
   }
+  public function initNode($key = '') {
+    global $mc;
+    if ($key != $this->root->key) {
+      if (($res = $mc->crud->read(urlencode($key))) !== false) {
+        $this->node = $res;
+      } else {
+        if (($res = $mc->crud->read($key)) !== false) {
+          $this->node = $res;
+        }
+      }
+    }
+    return null;
+  }
+  public function updateNode($args = array()) {
+    global $mc;
+    $this->initNode($args['key']);
+    if ($this->node) {
+      $currentParent  = $this->node->parent;
+      $newParent      = $args['parent'];
+      $this->node->parent = $args['parent'];
+      $this->node->name   = $args['name'];
+      $mc->crud->update($this->node->key, $this->node, true);
+      if ($newParent != $currentParent) {
+        $this->changeParent($this->node->key, $currentParent, $newParent);
+      }
+    }
+    return null;
+  }
   public function updateRoot($args = array()) {
     global $mc;
     $this->root->name   = $args['name'];
@@ -81,7 +151,12 @@ class mcTreeController {
   }
   public function viewNode($args = array()) {
     global $mc;
-    $mc->page->getPage('node', 'node');
+    $this->initNode($args['key']);
+    if ($this->node) {
+      $mc->page->getPage('node', 'node');
+    } else {
+      $mc->page->getPage('root', 'root');
+    }
     return null;
   }
 }

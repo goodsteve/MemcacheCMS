@@ -31,10 +31,10 @@ $rootTreeLinks  = $mc->tree->getTreeLinks($rootObj->key);
         </div>
       </div>
       </form>
+      <br />
     </div>
-    <br />
     <!-- Branch form -->
-    <div class="span5 well">
+    <div class="span5 well mc-branch-form">
       <h4>Branch Form</h4>
       <br />
       <form name="mcRootBranchForm" id="mcRootBranchForm" method="post" action="<?php echo MC_URL; ?>">
@@ -45,7 +45,7 @@ $rootTreeLinks  = $mc->tree->getTreeLinks($rootObj->key);
           Name:
         </div>
         <div class="span4">
-          <input type="text" class="span4" name="name" id="mcRootBranchName" maxlength="128" />
+          <input type="text" class="span4" name="name" id="mcBranchName" maxlength="128" />
         </div>
       </div>
       <div class="row">
@@ -55,6 +55,7 @@ $rootTreeLinks  = $mc->tree->getTreeLinks($rootObj->key);
         </div>
       </div>
       </form>
+      <br />
     </div>
   </div>
   <div class="span8 offset1">
@@ -76,5 +77,5 @@ $rootTreeLinks  = $mc->tree->getTreeLinks($rootObj->key);
   </div>
 </div>
 
-<script type="text/javascript">$('#mcRootBranchName').focus();</script>
+<script type="text/javascript">$('#mcBranchName').focus();</script>
 <?php include_once(MC_PATH_APP_VIEW_TEMPLATES . DS . 'footer.inc') ?>

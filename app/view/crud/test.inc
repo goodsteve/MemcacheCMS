@@ -33,7 +33,7 @@ if (isset($_POST['key']) && $_POST['key']) {
 <?php
 if ($key) {
   echo '<br /><b>Key: ' . $key . '</b><br /><br />';
-  if (($res = $mc->crud->read($key)) !== false) {
+  if (($res = $mc->crud->read_r($key)) !== false) {
     print_r($res);
   } else {
     echo 'false';
