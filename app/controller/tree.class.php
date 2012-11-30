@@ -1,7 +1,7 @@
 <?php
 class mcTreeController {
-  private $node   = null;     // mcNodeModel object.
-  private $root   = null;     // mcRootModel object.
+  private $node       = null;     // mcNodeModel object.
+  private $root       = null;     // mcRootModel object.
   public function __construct() {
     return null;
   }
@@ -50,18 +50,30 @@ class mcTreeController {
   public function getRoot() {
     return $this->root;
   }
-  
-  public function getNodeParentOptions(&$treeLinks, $node = '', $parent = '') {
-    $parentOptions  = '';
-    if ($node && $parent) {
-      foreach ($treeLinks AS $key => $linkPath) {
-        if ($key != $node) {
-          if ($key != $parent) {
-            $parentOptions  .= '<option value="' . $key . '">' . $linkPath . '</option>';
-          } else {
-            $parentOptions  .= '<option value="' . $key . '" selected="selected">' . $linkPath . '</option>';
-          }
+  private function getNodeParentOpts(&$parentOptions, $parentKey = '', $parentPath = '', $nodeKey = '', $nodeParent = '') {
+    global $mc;
+    if (($res = $mc->crud->read($parentKey)) !== false) {
+      $nodePath = $parentPath . '/' . $res->name;
+      if ($res->key != $nodeParent) {
+        $parentOptions .= '<option value="' . $res->key . '">' . $nodePath . '</option>';
+      } else {
+        $parentOptions .= '<option value="' . $res->key . '" selected="selected">' . $nodePath . '</option>';
+      }
+      foreach ($res->branches AS $k => $branchKey) {
+        if ($branchKey != $nodeKey) {
+          $this->getNodeParentOpts($parentOptions, $branchKey, $nodePath, $nodeKey, $nodeParent);
         }
+      }
+    }
+    return null;
+  }
+  public function getNodeParentOptions($rootKey = '', $nodeKey = '') {
+    global $mc;
+    $parentOptions  = '';
+    $nodeObj        = null;
+    if ($nodeKey && ($nodeKey != $rootKey)) {
+      if (($nodeObj = $mc->crud->read($nodeKey)) !== false) {
+        $this->getNodeParentOpts($parentOptions, $rootKey, '', $nodeObj->key, $nodeObj->parent);
       }
     }
     return $parentOptions;

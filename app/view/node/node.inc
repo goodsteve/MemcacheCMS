@@ -3,7 +3,7 @@ $rootObj            = $mc->tree->getRoot();
 $nodeObj            = $mc->tree->getNode();
 $rootTreeLinks      = $mc->tree->getTreeLinks($rootObj->key);
 $nodeTreeLinks      = $mc->tree->getTreeLinks($nodeObj->parent);
-$nodeParentOptions  = $mc->tree->getNodeParentOptions($rootTreeLinks, $nodeObj->key, $nodeObj->parent);
+$nodeParentOptions  = $mc->tree->getNodeParentOptions($rootObj->key, $nodeObj->key);
 ?>
 
 <?php include_once(MC_PATH_APP_VIEW_TEMPLATES . DS . 'header.inc') ?>
